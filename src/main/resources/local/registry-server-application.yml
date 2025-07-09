@@ -1,0 +1,16 @@
+server:
+  port: 2000
+
+eureka:
+  instance:
+    hostname: localhost
+  server:
+    enable-self-preservation: true
+    renewal-percent-threshold: 0.85
+    wait-time-in-ms-when-sync-empty: 0
+    evictionIntervalTimerInMs: 10000
+  client:
+    registerWithEureka: false
+    fetch-registry: false
+    service-url:
+      default-zone: http://${eureka.instance.hostname}:${server.port}/eureka/

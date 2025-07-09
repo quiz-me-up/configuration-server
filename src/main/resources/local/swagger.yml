@@ -1,0 +1,10 @@
+springdoc:
+  swagger-ui:
+    use-root-path: true
+    oauth:
+      usePkceWithAuthorizationCodeGrant: true
+      client-id: swagger
+      client-secret:
+  oauth-flow:
+    authorization-url: http://localhost:5000/oauth2/authorize
+    token-url: http://localhost:5000/oauth2/token

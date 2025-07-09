@@ -1,0 +1,89 @@
+server:
+  port: 0
+
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  security:
+    oauth2:
+      resource-server:
+        jwt:
+          issuer-uri: http://localhost:5000
+      client:
+        registration:
+          server:
+            provider: spring
+            client-id: server
+            client-name: server
+            client-secret: secret
+            authorization-grant-type: client_credentials
+            scope:
+              - read
+              - write
+        provider:
+          spring:
+            token-uri: http://localhost:5000/oauth2/token
+  cloud:
+    openfeign:
+      oauth2:
+        enabled: true
+        clientRegistrationId: server
+
+management:
+  endpoint:
+    env:
+      show-values: ALWAYS
+    metrics:
+      enable: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+    instanceId: ${spring.application.name}:${spring.application.instance_id:${random.value}}
+  client:
+    registryFetchIntervalSeconds: 5
+    serviceUrl:
+      defaultZone: http://localhost:2000/eureka/
+
+security:
+  enabled: true
+  unprotected-path:
+    - /
+    - /error
+    - /favicon.ico
+    - /*/*.png
+    - /*/*.gif
+    - /*/*.svg
+    - /*/*.jpg
+    - /*/*.html
+    - /*/*.css
+    - /*/*.js
+    - /*/*.js.map
+    - /actuator/**
+    - /v3/api-docs
+    - /v3/api-docs/**
+    - /swagger-ui.html
+    - /swagger-resources/**
+    - /swagger-ui/**
+    - /webjars/**
+    - /assets/**
+    - /csrf
+    - /oauth/**
+    - /oauth2/**
+    - /login
+    - /logout
+
+logging:
+  level:
+    io.github.cnadjim: DEBUG
+    org.springframework.context.support: ERROR
+    org.mongodb: ERROR
+    com.netflix.discovery: ERROR
+    com.netflix.eureka.registry: ERROR

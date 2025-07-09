@@ -1,0 +1,106 @@
+server:
+  port: 4000
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            corsConfigurations:
+              '[/**]':
+                allowed-origins: "http://localhost:8082"
+                allowed-methods: "*"
+                allowed-headers: "*"
+                allow-credentials: true
+          discovery:
+            locator:
+              enabled: true
+          routes:
+            - id: user-application
+              uri: lb://user-application
+              predicates:
+                - Path=/api/user-application/**
+              filters:
+                - StripPrefix=2
+            - id: account-application
+              uri: lb://account-application
+              predicates:
+                - Path=/api/account-application/**
+              filters:
+                - StripPrefix=2
+            - id: friendship-application
+              uri: lb://friendship-application
+              predicates:
+                - Path=/api/friendship-application/**
+              filters:
+                - StripPrefix=2
+            - id: topic-application
+              uri: lb://topic-application
+              predicates:
+                - Path=/api/topic-application/**
+              filters:
+                - StripPrefix=2
+            - id: blockship-application
+              uri: lb://blockship-application
+              predicates:
+                - Path=/api/blockship-application/**
+              filters:
+                - StripPrefix=2
+            - id: comment-application
+              uri: lb://comment-application
+              predicates:
+                - Path=/api/comment-application/**
+              filters:
+                - StripPrefix=2
+            - id: followship-application
+              uri: lb://followship-application
+              predicates:
+                - Path=/api/followship-application/**
+              filters:
+                - StripPrefix=2
+            - id: game-application
+              uri: lb://game-application
+              predicates:
+                - Path=/api/game-application/**
+              filters:
+                - StripPrefix=2
+            - id: notification-application
+              uri: lb://notification-application
+              predicates:
+                - Path=/api/notification-application/**
+              filters:
+                - StripPrefix=2
+            - id: question-application
+              uri: lb://question-application
+              predicates:
+                - Path=/api/question-application/**
+              filters:
+                - StripPrefix=2
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: user-application
+        url: /api/user-application/v3/api-docs
+      - name: account-application
+        url: /api/account-application/v3/api-docs
+      - name: friendship-application
+        url: /api/friendship-application/v3/api-docs
+      - name: topic-application
+        url: /api/topic-application/v3/api-docs
+      - name: blockship-application
+        url: /api/blockship-application/v3/api-docs
+      - name: comment-application
+        url: /api/comment-application/v3/api-docs
+      - name: followship-application
+        url: /api/followship-application/v3/api-docs
+      - name: game-application
+        url: /api/game-application/v3/api-docs
+      - name: notification-application
+        url: /api/notification-application/v3/api-docs
+      - name: question-application
+        url: /api/question-application/v3/api-docs
