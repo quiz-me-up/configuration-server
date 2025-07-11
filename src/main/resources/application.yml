@@ -9,3 +9,9 @@ spring:
       server:
         native:
           search-locations: classpath:/local
+
+---
+spring:
+  profiles: docker
+server:
+  port: 8080
