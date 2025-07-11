@@ -63,8 +63,3 @@ jobs:
           image_tag: ${{ steps.next_version.outputs.version }}
           dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
           dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
-          target_dir: target
-          java_xmx: 512m
-          java_xms: 256m
-          spring_profiles: docker
-          app_port: 8080
