@@ -7,13 +7,21 @@
     <parent>
         <groupId>io.github.quizmeup</groupId>
         <artifactId>spring-cloud-parent</artifactId>
-        <version>1.0.1</version>
+        <version>1.0.0</version>
         <relativePath/>
     </parent>
 
-    <version>1.0.3</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
     <artifactId>configuration-server</artifactId>
+
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub Packages</name>
+            <url>https://maven.pkg.github.com/quiz-me-up/${project.artifactId}</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -21,5 +29,4 @@
             <artifactId>spring-cloud-config-server</artifactId>
         </dependency>
     </dependencies>
-
 </project>
