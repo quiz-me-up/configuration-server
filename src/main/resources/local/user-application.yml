@@ -5,3 +5,12 @@ spring:
   data:
     mongodb:
       database: user-application-database
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server:
+  port: 8080

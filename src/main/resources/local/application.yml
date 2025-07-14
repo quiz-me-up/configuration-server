@@ -87,3 +87,13 @@ logging:
     org.mongodb: ERROR
     com.netflix.discovery: ERROR
     com.netflix.eureka.registry: ERROR
+
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server:
+  port: 8080

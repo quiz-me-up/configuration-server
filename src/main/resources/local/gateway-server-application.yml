@@ -104,3 +104,12 @@ springdoc:
         url: /api/notification-application/v3/api-docs
       - name: question-application
         url: /api/question-application/v3/api-docs
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+
+server:
+  port: 8080

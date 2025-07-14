@@ -7,3 +7,12 @@ spring:
       password: root
       authentication-database: admin
       auto-index-creation: true
+
+---
+spring:
+  config:
+    activate:
+      on-profile: docker
+  data:
+    mongodb:
+      host: mongo-database
