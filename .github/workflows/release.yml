@@ -51,13 +51,6 @@ jobs:
           encrypt_key: ${{ secrets.QUIZ_ME_UP_ENCRYPT_KEY }}
           spring_profiles: production,docker
 
-      - name: Create changelog
-        id: changelog
-        uses: requarks/changelog-action@v1
-        with:
-          token: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
-          tag: ${{ steps.next_version.outputs.full_version }}
-
       - name: Setup git bot user
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-git-bot-user@master
 
@@ -67,6 +60,13 @@ jobs:
           git commit --allow-empty -m "release ${{ steps.next_version.outputs.full_version }}"
           git tag -a ${{ steps.next_version.outputs.full_version }} -m "ci : release ${{ steps.next_version.outputs.full_version }}"
           git push origin master --follow-tags
+
+      - name: Create changelog
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
+          tag: ${{ steps.next_version.outputs.full_version }}
 
       - name: Create release
         uses: softprops/action-gh-release@v1
