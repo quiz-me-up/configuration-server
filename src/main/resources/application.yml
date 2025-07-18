@@ -1,19 +1,39 @@
 server:
   port: 1000
 
+encrypt:
+  key: ${QUIZ_ME_UP_ENCRYPT_KEY}
+
+springdoc:
+  swagger-ui:
+    use-root-path: true
+
 spring:
+  application:
+    name: configuration-server-application
   profiles:
-    active: native
+    active: development, native
   cloud:
     config:
       server:
+        prefix: /configuration
         native:
-          search-locations: classpath:/local
+          search-locations: classpath:/development
 
 ---
+server:
+  port: 8080
+
 spring:
   config:
     activate:
-      on-profile: docker
-server:
-  port: 8080
+      on-profile: production
+  cloud:
+    config:
+      server:
+        git:
+          default-label: master
+          username: '{cipher}e808fcdab822c4df20668386a1d06edcf4dc349e6fcb75ab121b2b1b9354e89b'
+          password: '{cipher}1696311d1fe5f221f5ea4d6589f9c38c70fa0eaac1f9031522cc83ba90832165b7280bcef0f3811ad854dbff8a4d17149ea75221d628cfa16d536f7cc1c7f39b'
+          uri: https://github.com/quiz-me-up/configuration-repository
+          search-paths: production

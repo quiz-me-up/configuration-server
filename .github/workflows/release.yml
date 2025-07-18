@@ -17,7 +17,7 @@ jobs:
   release:
     runs-on: ubuntu-latest
     env:
-      GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
     steps:
       - name: Checkout project directory
         uses: actions/checkout@v4
@@ -36,22 +36,7 @@ jobs:
 
       - name: Update pom.xml versions
         run: |
-          mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false
-
-      - name: Create Tag
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add .
-          git commit --allow-empty -m "release ${{ steps.next_version.outputs.full_version }}"
-          git tag -a ${{ steps.next_version.outputs.full_version }} -m "release ${{ steps.next_version.outputs.full_version }}"
-          git push origin master --follow-tags
-
-      - name: Create release
-        uses: softprops/action-gh-release@v1
-        with:
-          tag_name: ${{ steps.next_version.outputs.full_version }}
-          name: Release ${{ steps.next_version.outputs.full_version }}
+          mvn versions:set -DnewVersion=${{ steps.next_version.outputs.version }} -DprocessAllModules=true -DgenerateBackupPoms=false -DremoveSnapshot=true
 
       - name: Maven build command execution
         run: mvn clean install
@@ -61,6 +46,31 @@ jobs:
         with:
           image_name: configuration-server
           image_tag: ${{ steps.next_version.outputs.version }}
-          dockerhub_username: ${{ secrets.DOCKERHUB_USERNAME }}
-          dockerhub_token: ${{ secrets.DOCKERHUB_TOKEN }}
-          spring_profiles: native,docker
+          dockerhub_username: ${{ secrets.QUIZ_ME_UP_DOCKER_USERNAME }}
+          dockerhub_token: ${{ secrets.QUIZ_ME_UP_DOCKER_TOKEN }}
+          encrypt_key: ${{ secrets.QUIZ_ME_UP_ENCRYPT_KEY }}
+          spring_profiles: production,docker
+
+      - name: Create changelog
+        id: changelog
+        uses: requarks/changelog-action@v1
+        with:
+          token: ${{ secrets.QUIZ_ME_UP_GITHUB_TOKEN }}
+          tag: ${{ steps.next_version.outputs.full_version }}
+
+      - name: Setup git bot user
+        uses: quiz-me-up/reusable-workflow/.github/actions/setup-git-bot-user@master
+
+      - name: Create Tag
+        run: |
+          git add .
+          git commit --allow-empty -m "release ${{ steps.next_version.outputs.full_version }}"
+          git tag -a ${{ steps.next_version.outputs.full_version }} -m "ci : release ${{ steps.next_version.outputs.full_version }}"
+          git push origin master --follow-tags
+
+      - name: Create release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.next_version.outputs.full_version }}
+          name: Release ${{ steps.next_version.outputs.full_version }}
+          body: ${{ steps.changelog.outputs.changes }}

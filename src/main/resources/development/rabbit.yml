@@ -1,0 +1,6 @@
+spring:
+  rabbitmq:
+    username: '{cipher}c377f894a0e500e2e812df83553b7b19429b6b72657870a647809b7d5631a167'
+    password: '{cipher}4c1dc1eb1b3329010c2f6f5a7d740a52178618fcf19649f5e24d4354168acfa8'
+    host: localhost
+    port: 5672

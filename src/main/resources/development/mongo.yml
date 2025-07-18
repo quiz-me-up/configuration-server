@@ -1,0 +1,9 @@
+spring:
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      username: '{cipher}8beb53a3adc0d6843fbf4a2efb45d260dfa31c29861282d7428447cadf3d80c2'
+      password: '{cipher}ab3a92c6e8145ed22ef1dcfa71982cca2648c3af157eefbdc3f2c19e6f35eca6'
+      authentication-database: admin
+      auto-index-creation: true

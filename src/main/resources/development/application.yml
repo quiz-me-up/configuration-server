@@ -1,6 +1,7 @@
 server:
   port: 0
 
+
 spring:
   main:
     allow-bean-definition-overriding: true
@@ -15,7 +16,7 @@ spring:
             provider: spring
             client-id: server
             client-name: server
-            client-secret: secret
+            client-secret: '{cipher}25b98bf2c0db229afdad5e62df2cf441b0b45e86f317137c22842bcb092f667d'
             authorization-grant-type: client_credentials
             scope:
               - read
@@ -52,48 +53,45 @@ eureka:
     serviceUrl:
       defaultZone: http://localhost:2000/eureka/
 
-security:
-  enabled: true
-  unprotected-path:
-    - /
-    - /error
-    - /favicon.ico
-    - /*/*.png
-    - /*/*.gif
-    - /*/*.svg
-    - /*/*.jpg
-    - /*/*.html
-    - /*/*.css
-    - /*/*.js
-    - /*/*.js.map
-    - /actuator/**
-    - /v3/api-docs
-    - /v3/api-docs/**
-    - /swagger-ui.html
-    - /swagger-resources/**
-    - /swagger-ui/**
-    - /webjars/**
-    - /assets/**
-    - /csrf
-    - /oauth/**
-    - /oauth2/**
-    - /login
-    - /logout
+quizmeup:
+  security:
+    enabled: true
+    unprotected-path:
+      - /
+      - /error
+      - /favicon.ico
+      - /*/*.png
+      - /*/*.gif
+      - /*/*.svg
+      - /*/*.jpg
+      - /*/*.html
+      - /*/*.css
+      - /*/*.js
+      - /*/*.js.map
+      - /actuator/**
+      - /v3/api-docs
+      - /v3/api-docs/**
+      - /swagger-ui.html
+      - /swagger-resources/**
+      - /swagger-ui/**
+      - /webjars/**
+      - /assets/**
+      - /csrf
+      - /oauth/**
+      - /oauth2/**
+      - /login
+      - /logout
 
 logging:
   level:
-    io.github.cnadjim: DEBUG
-    org.springframework.context.support: ERROR
     org.mongodb: ERROR
+    io.github.quizmeup: DEBUG
     com.netflix.discovery: ERROR
-    com.netflix.eureka.registry: ERROR
-
-
----
-spring:
-  config:
-    activate:
-      on-profile: docker
-
-server:
-  port: 8080
+    com.netflix.eureka: ERROR
+    org.springframework.context.support: ERROR
+    org.springframework.security: ERROR
+    org.springframework.web: ERROR
+    org.springframework.cloud: ERROR
+    org.springframework.boot: ERROR
+    org.springframework.amqp.rabbit: ERROR
+    org.springframework.data.convert.CustomConversions: ERROR

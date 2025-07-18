@@ -1,0 +1,43 @@
+server:
+  port: 4000
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin
+          globalcors:
+            add-to-simple-url-handler-mapping: true
+            corsConfigurations:
+              '[/**]':
+                allowed-origins: "http://localhost:8082"
+                allowed-methods: "*"
+                allowed-headers: "*"
+                allow-credentials: true
+          discovery:
+            locator:
+              enabled: true
+          routes:
+            - id: user-application
+              uri: lb://user-application
+              predicates:
+                - Path=/api/user-application/**
+              filters:
+                - StripPrefix=2
+
+            - id: account-application
+              uri: lb://account-application
+              predicates:
+                - Path=/api/account-application/**
+              filters:
+                - StripPrefix=2
+
+springdoc:
+  swagger-ui:
+    urls:
+      - name: user-application
+        url: /api/user-application/v3/api-docs
+      - name: account-application
+        url: /api/account-application/v3/api-docs
