@@ -1,0 +1,8 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: quizmeup-configuration-server-development-config-map
+  namespace: quizmeup-development
+data:
+  SERVER_PORT: "8080"

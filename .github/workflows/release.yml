@@ -56,8 +56,8 @@ jobs:
       - name: Create Tag
         run: |
           git add .
-          git commit --allow-empty -m "release ${{ steps.next_version.outputs.full_version }}"
-          git tag -a ${{ steps.next_version.outputs.full_version }} -m "ci : release ${{ steps.next_version.outputs.full_version }}"
+          git commit --allow-empty -m "ci: release ${{ steps.next_version.outputs.full_version }}"
+          git tag -a ${{ steps.next_version.outputs.full_version }} -m "release: ${{ steps.next_version.outputs.full_version }}"
           git push origin master --follow-tags
 
       - name: Create changelog

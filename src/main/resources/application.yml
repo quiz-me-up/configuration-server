@@ -19,6 +19,12 @@ spring:
         prefix: /configuration
         native:
           search-locations: classpath:/development
+management:
+  endpoints:
+    web:
+      base-path: /actuator
+      exposure:
+        include: health,info
 
 ---
 server:
