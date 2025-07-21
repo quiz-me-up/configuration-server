@@ -47,7 +47,6 @@ jobs:
           image_tag: ${{ steps.next_version.outputs.version }}
           dockerhub_username: ${{ secrets.QUIZ_ME_UP_DOCKER_USERNAME }}
           dockerhub_token: ${{ secrets.QUIZ_ME_UP_DOCKER_TOKEN }}
-          encrypt_key: ${{ secrets.QUIZ_ME_UP_ENCRYPT_KEY }}
           spring_profiles: production,docker
 
       - name: Setup git bot user

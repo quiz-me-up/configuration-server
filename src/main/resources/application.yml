@@ -12,13 +12,13 @@ spring:
   application:
     name: configuration-server-application
   profiles:
-    active: development, native
+    active: local, native
   cloud:
     config:
       server:
         prefix: /configuration
         native:
-          search-locations: classpath:/development
+          search-locations: classpath:/local
 management:
   endpoints:
     web:
@@ -39,7 +39,6 @@ spring:
       server:
         git:
           default-label: master
-          username: '{cipher}e808fcdab822c4df20668386a1d06edcf4dc349e6fcb75ab121b2b1b9354e89b'
-          password: '{cipher}1696311d1fe5f221f5ea4d6589f9c38c70fa0eaac1f9031522cc83ba90832165b7280bcef0f3811ad854dbff8a4d17149ea75221d628cfa16d536f7cc1c7f39b'
+          username: '{cipher}955945e00477700b2956db55415d711116d4e1c260dac4bcef849f6c9e72418b'
+          password: '{cipher}25607a7323431f150534bb2f1e7210c31289a2a679f3182dd0800b3bbf592e4b3848b66c3925121b3daaca6ae29b3148279f490f4546cec78f047dca73101019'
           uri: https://github.com/quiz-me-up/configuration-repository
-          search-paths: production
