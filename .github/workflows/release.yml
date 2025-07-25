@@ -32,6 +32,8 @@ jobs:
 
       - name: Setup java-maven
         uses: quiz-me-up/reusable-workflow/.github/actions/setup-java-maven@master
+        with:
+          settings-xml: ${{ vars.QUIZ_ME_UP_MAVEN_SETTINGS_XML }}
 
       - name: Update pom.xml versions
         run: |
