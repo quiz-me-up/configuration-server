@@ -12,7 +12,7 @@
     </parent>
 
     <packaging>jar</packaging>
-    <version>1.0.2-SNAPSHOT</version>
+    <version>1.0.2</version>
     <artifactId>configuration-server</artifactId>
 
     <distributionManagement>
