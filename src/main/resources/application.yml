@@ -39,6 +39,6 @@ spring:
       server:
         git:
           default-label: master
-          username: '{cipher}955945e00477700b2956db55415d711116d4e1c260dac4bcef849f6c9e72418b'
-          password: '{cipher}25607a7323431f150534bb2f1e7210c31289a2a679f3182dd0800b3bbf592e4b3848b66c3925121b3daaca6ae29b3148279f490f4546cec78f047dca73101019'
+          username: '{cipher}9f704c25fe2859616bb760fc55c0a098341c72667e6d9c1e8e80a260f833c4ef'
+          password: '{cipher}2c2d1f6988ef14da0626aa8e557f44618ccaa09a08b8289a3c57ae283dd04b73f5532465d329888f7c0767e77c2a622ead455a28e888bb5670e05d17f2f20b90'
           uri: https://github.com/quiz-me-up/configuration-repository
